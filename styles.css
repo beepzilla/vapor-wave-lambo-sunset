@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323');
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #333;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.vapor {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.vapor h1 {
+  z-index: 5;
+  position: relative;
+  padding-top: 30px;
+  text-align: center;
+  color: rgba(255,107,109,0.75);
+  font-family: 'VT323', monospace;
+  font-size: 47pt;
+  text-transform: uppercase;
+}
+
+.sky {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgb(255,100,100);
+  background: -webkit-radial-gradient(
+    center, ellipse cover, 
+    rgba(255,100,100,1) 0%,
+    rgba(248,7,146,1) 22%,
+    rgba(176,9,122,1) 46%,
+    rgba(176,9,122,1) 46%,
+    rgba(102,20,94,1) 100%);
+  background: radial-gradient(
+    center, ellipse cover,
+    rgba(255,100,100,1) 0%,
+    rgba(248,7,146,1) 22%,
+    rgba(176,9,122,1) 46%,
+    rgba(176,9,122,1) 46%,
+    rgba(102,20,94,1) 100%);
+  z-index: 0;
+}
+
+.sky:after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: -25%;
+  width: 100%;
+  height: 150%;
+  opacity: 0.15;
+  filter: blur(5px);
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/209305/win98.gif);
+  animation: animatedBackground 60s linear infinite;
+  z-index: 1;
+}
+
+@keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+}
+
+.sun {
+  position: absolute;
+  bottom: 250px;
+  left:40%;
+  width: 20%;
+  height: 20vw;
+  filter: blur(1px);
+  border-radius: 1000px;
+  background: rgb(252,8,108);
+  background: linear-gradient(
+    to bottom,
+    rgba(252,8,108,1) 15%,
+    rgba(240,88,127,1) 50%,
+    rgba(255,107,109,1) 90%);
+  z-index: 2;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgb(142,76,127);
+  background: linear-gradient(
+    to top,
+    rgba(148,208,255,1) 20%,
+    rgba(255,106,213,1) 80%);
+}
+
+.car {
+  position: absolute;
+  bottom: 0;
+  left: 50vw;
+  width: 148px;
+  height: 125px;
+  transform: scale(1.5,1.5);
+  animation: driving 8s linear infinite;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/209305/car.png);
+  z-index: 3;
+}
+
+.car img {
+  margin-top: -27px;
+  margin-left: 75px;
+  width: 65px;
+}
+
+@keyframes driving {
+  80% {
+    bottom: 5px;
+    left: 49vw;
+  }
+}
+
+.haze {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: -25px;
+  background: rgba(0,0,0,0.45);
+  -webkit-filter: blur(15px);
+  filter: blur(15px);
+  z-index: 1;
+}
+
+img.palm {
+  position: absolute;
+  top: -50%;
+  left: 37%;
+  width: 200px;
+  transform: scale(0.025, 0.025);
+  -webkit-animation: hueRotate 8s linear infinite,
+    palmPassing 8s ease-in infinite;
+  animation: hueRotate 8s linear infinite,
+    palmPassing 8s ease-in infinite;
+  z-index: 1;
+}
+
+img.palmrev {
+  position: absolute;
+  top: -50%;
+  right: 37%;
+  width: 200px;
+  transform: scale(-0.025, 0.025);
+  -webkit-animation: hueRotate 8s linear infinite,
+    revPassing 8s ease-in infinite;
+  animation: hueRotate 8s linear infinite,
+    revPassing 8s ease-in infinite;
+  -webkit-animation-delay: -4s; /* Chrome, Safari, Opera */
+  animation-delay: -4s;
+  z-index: 1;
+}
+
+@keyframes palmPassing {
+  100% {
+    transform: scale(2, 2);
+    left: -250px;
+    bottom: 0;
+  }
+}
+
+@keyframes revPassing {
+  100% {
+    transform: scale(-2, 2);
+    right: -250px;
+    bottom: 0;
+  }
+}
+
+@keyframes hueRotate {
+  0% { filter: hue-rotate(-180deg) blur(10px); }
+  50% { filter: hue-rotate(-45deg) blur(0px); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+.grid-container {
+  height: 320px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 480px;
+  transform: translate3d(0, 0, 0);
+}
+
+.grid-container:after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  animation: animatedBackground 60s linear reverse infinite;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/209305/waves.png);
+  z-index: 2;
+}
+
+.grid {
+  width: 400px;
+  height: 8000px;
+  color: #f12;
+  background: rgba(153,153,153,0.6);
+  z-index: 3;
+  animation:
+    slide-up .5s linear infinite;
+  
+  div {
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    float: left;
+    border: 10px solid;
+    border-right: none;
+    border-top-width: 2.5px;
+    border-bottom-width: 2.5px;
+    animation:
+      shine 1s linear infinite;
+    
+    &:nth-child(4n) {
+      border-right: 10px solid
+    }
+    
+    @for $i from 1 through $cells {
+      $j: $cells - ($i - 1);
+      &:nth-child(#{$i}) {
+        opacity:
+          1 - ($j / $cells) * 2.5;
+        animation-delay:
+          ceil($j / 4) * 50ms;
+      }
+    }
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform:
+      rotateX(70deg)
+      translateY(-3600px);
+  }
+  to {
+    
+    $s-color: rgba(blue, .5);
+    transform:
+      rotateX(70deg)
+      translateY(-3500px);
+    box-shadow:
+      -72px 0 80px -64px $s-color,
+       72px 0 80px -64px $s-color;
+  }
+}
+
+@keyframes shine {
+  50% {
+    color: hotpink;
+    background: currentColor;
+    box-shadow:
+      0 0 36px 20px,
+      inset 0 0 36px;
+  }
+}
+
+@media (max-width: 850px) {
+  .vapor h1 {
+    font-size: 42pt;
+  }
+  
+  .sky {
+    background: -webkit-radial-gradient(
+    bottom, ellipse cover, 
+    rgba(255,100,100,1) 0%,
+    rgba(248,7,146,1) 22%,
+    rgba(176,9,122,1) 46%,
+    rgba(176,9,122,1) 46%,
+    rgba(102,20,94,1) 100%);
+  background: radial-gradient(
+    bottom, ellipse cover,
+    rgba(255,100,100,1) 0%,
+    rgba(248,7,146,1) 22%,
+    rgba(176,9,122,1) 46%,
+    rgba(176,9,122,1) 46%,
+    rgba(102,20,94,1) 100%);
+  }
+  
+  .sun {
+    left: 30%;
+    width: 40%;
+    height: 40vw;
+  }
+  
+  img.palm {
+    left: 32%;
+  }
+
+  img.palmrev {
+    right: 32%;
+  }
+}
+
+@media (max-width: 600px) {
+   .vapor h1 {
+    font-size: 32pt;
+  }
+  
+  .sun {
+    left: 25%;
+    width: 50%;
+    height: 50vw;
+  }
+  
+  img.palm {
+    left: 25%;
+  }
+
+  img.palmrev {
+    right: 25%;
+  }
+}
+
+
+.sound-wrapper {
+  position: absolute;
+  top: -10px;
+  right: 50px;
+  color: white;
+  animation: filter-animation 8s infinite;
+}
+
+// Base class
+.emoji-toggle {
+  position: relative;
+  width: 60px;
+  margin: 40px auto;
+  .well {
+    display: block;
+    background: #eee;
+    height: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .toggle {
+    opacity: 0;
+    border: 0;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    cursor: pointer;
+    z-index: 100; 
+    ~.emoji:before {
+      content: "\1F509";
+      position: absolute;
+      left: 0;
+      top: -15px;
+      font-size: 40px;
+      transition: 0.2s;
+    }
+    &:checked {
+      ~.emoji:before {
+        left: 100%;
+        margin-left: -1em;
+      }
+    }
+     ~label {
+      white-space: nowrap;
+      &:before {
+        position: absolute;
+        right: 100%;
+        margin-right: 5px;
+        top: 0;
+      }
+      &:after {
+        position: absolute;
+        left: 100%;
+        margin-left: 5px; 
+        top: 0;
+      }
+    }
+  }
+}
+
+@mixin emojiType($leftEmoji, $rightEmoji, $leftLabel, $rightLabel) {
+  .toggle {
+    ~.emoji:before {
+      content: $leftEmoji;
+    }
+    &:checked {
+      ~.emoji:before {
+        content: $rightEmoji;
+      }
+    }
+     ~label {
+      &:before {
+        content: $leftLabel;
+      }
+      &:after {
+        content: $rightLabel;
+      }
+    }
+  }
+}
+
+.emoji-happy {
+  @include emojiType(
+    "\1F509", "\1F50A", "Off", "On"
+  );
+}
+
+@-webkit-keyframes filter-animation {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  
+  100% {
+    -webkit-filter: hue-rotate(360deg);
+  }
+}
