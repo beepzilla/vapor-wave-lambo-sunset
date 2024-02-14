@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaporwave Animation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="vapor">
+        <div class="sky">
+            <h1>almost there</h1>
+            <div class="sun"></div>
+        </div>
+        
+        <div class="ground">
+            <div class="haze"></div>
+            <img class="palm"
+                src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/209305/palmtree.png"
+                alt="A palm tree." />
+            <img class="palmrev"
+                src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/209305/palmtree.png"
+                alt="Another palm tree." />
+            <div class="car">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/209305/spooky-skeletal.gif"
+                    alt="spooky skeleton" />
+            </div>
+            <div class="grid-container">
+                <div class="grid" id="grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sound-wrapper">
+        <div class="emoji-toggle emoji-happy">
+            <input type="checkbox" id="sound"
+                class="toggle" onchange="myfunction(this)">
+            <div class="emoji"></div>
+            <label for="sound" class="well"></label>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
